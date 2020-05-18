@@ -28,13 +28,6 @@ public class MainController {
         this.newsController = new NewsController(this);
         this.activity.setFragment(this.newsController.getFragment() , true);
     }
-    
-    public void setFragment(Fragment frag){
-        FragmentManager fragmentManager = ((MainActivity)this.mainFragment.getContext()).getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, frag);
-        fragmentTransaction.addToBackStack(null).commit();
-    }
 
     public MainActivity getActivity(){
         return this.activity;

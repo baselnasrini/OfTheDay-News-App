@@ -1,8 +1,10 @@
+/**
+ * Author: Mohammed Basel Nasrini
+ * Last edited: 2020-05-21
+ */
 package com.ofthedaynews.models;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class NewsArticle {
     private String title, source, author, description, url, imageURL, content;
@@ -42,6 +44,10 @@ public class NewsArticle {
 
     public String getImageURL() {
         return imageURL;
+    }
+
+    public void setImageURL(String url){
+        this.imageURL = url;
     }
 
     public String getContent() {

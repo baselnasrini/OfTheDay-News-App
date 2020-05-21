@@ -1,3 +1,7 @@
+/**
+ * Author: Mohammed Basel Nasrini
+ * Last edited: 2020-05-21
+ */
 package com.ofthedaynews;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +13,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.ofthedaynews.controllers.MainController;
@@ -24,11 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
         mainController = new MainController(this);
 
-
         if (savedInstanceState == null){
             setFragment(mainController.getMainFragment(), false);
         }
-
     }
 
     public void setFragment(Fragment fragment, boolean backStack) {
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.addToBackStack(null).commit();
-
         }
         else{
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         }
-
     }
 
     public boolean isOnline() {

@@ -1,3 +1,7 @@
+/**
+ * Author: Mohammed Basel Nasrini
+ * Last edited: 2020-05-21
+ */
 package com.ofthedaynews.ui;
 
 import android.content.Context;
@@ -7,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +38,7 @@ public class NewsFragment extends Fragment {
     private ArticlesAdapter articlesAdapter;
     private ProgressBar progressBar;
     private FloatingActionButton btnSetting;
-    private int position = -1;
+    private int position = 0;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -64,24 +67,30 @@ public class NewsFragment extends Fragment {
         sharedViewModel.getNewsArticlesArr().observe(getViewLifecycleOwner(), new Observer<ArrayList<NewsArticle>>() {
             @Override
             public void onChanged(ArrayList<NewsArticle> newsArticles) {
+                progressBar.setVisibility(View.VISIBLE);
                 if(newsArticles != null){
                     articlesAdapter = new ArticlesAdapter(getActivity().getApplicationContext(), newsArticles);
                     lvNews.setAdapter(articlesAdapter);
                 }
                 articlesAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.INVISIBLE);
-
-                if (position != -1 ){
-                    lvNews.smoothScrollToPosition(position + 1);
-                }
+                lvNews.setSelection(position);
             }
         });
 
         lvNews.setOnItemClickListener(new NewsListViewListener());
+
+        btnSetting.setOnClickListener(new NewsFilterButtonListener());
     }
 
     public void setController(NewsController newsController) {
         this.newsController = newsController;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        position = lvNews.getLastVisiblePosition() - 2;
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     private class ArticlesAdapter extends ArrayAdapter<NewsArticle> {
@@ -94,14 +103,16 @@ public class NewsFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            NewsArticle article = getItem(position);
-            ViewHolder holder;
+            final NewsArticle article = getItem(position);
+            final ViewHolder holder;
             if(convertView==null) {
                 convertView = inflater.inflate(R.layout.article_row,parent,false);
                 holder = new ViewHolder();
                 holder.tvTitle = convertView.findViewById(R.id.txtTitle);
                 holder.tvDate = convertView.findViewById(R.id.txtTime);
                 holder.image = convertView.findViewById(R.id.imageView);
+                holder.image.setVisibility(View.GONE);
+                holder.progressBar = convertView.findViewById(R.id.progressBarImage);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder)convertView.getTag();
@@ -109,11 +120,24 @@ public class NewsFragment extends Fragment {
 
             String title = article.getTitle();
             holder.tvTitle.setText(title);
-            //new DownloadImageTask(holder.image).execute(article.getImageURL());
-            Picasso.get().load(article.getImageURL()).into(holder.image);
 
+            Picasso.get().load(article.getImageURL())
+                    .into(holder.image, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.progressBar.setVisibility(View.GONE);
+                            holder.image.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            holder.image.setVisibility(View.VISIBLE);
+                            article.setImageURL("https://s3.distributorcentral.com/images/shared/img_not_available.png");
+                            Picasso.get().load(article.getImageURL()).into(holder.image);
+                        }
+                    });
             holder.tvDate.setText(article.getPublishedAt());
-
             return convertView;
         }
 
@@ -121,7 +145,7 @@ public class NewsFragment extends Fragment {
             private TextView tvTitle;
             private TextView tvDate;
             private ImageView image;
-            private TextView tvAmount;
+            private ProgressBar progressBar;
         }
     }
 
@@ -130,6 +154,16 @@ public class NewsFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
             position = i;
             newsController.showArticle((NewsArticle) parent.getItemAtPosition(i));
+        }
+    }
+
+    private class NewsFilterButtonListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            position = 0;
+            newsController.showFilter();
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 }

@@ -1,12 +1,13 @@
+/**
+ * Author: Mohammed Basel Nasrini
+ * Last edited: 2020-05-21
+ */
 package com.ofthedaynews.controllers;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.ofthedaynews.MainActivity;
 import com.ofthedaynews.ui.MainFragment;
-import com.ofthedaynews.R;
 
 public class MainController {
     private MainActivity activity;

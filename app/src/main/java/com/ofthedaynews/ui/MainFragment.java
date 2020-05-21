@@ -1,3 +1,7 @@
+/**
+ * Author: Mohammed Basel Nasrini
+ * Last edited: 2020-05-21
+ */
 package com.ofthedaynews.ui;
 
 import android.os.Bundle;
@@ -13,9 +17,6 @@ import com.ofthedaynews.R;
 import com.ofthedaynews.controllers.MainController;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MainFragment extends Fragment {
     private Button btnNews;
     private Button btnWeather;
@@ -24,7 +25,6 @@ public class MainFragment extends Fragment {
     public MainFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

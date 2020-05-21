@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">OfTheDay News</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="readFullArticle">Read full article \n\n\n</string>
+    <string name="filter_by_country">Filter By Country</string>
+    <string name="filter_by_source">Filter By Source</string>
+    <string name="save">Save</string>
+    <string name="set_filter">Set filter</string>
 </resources>

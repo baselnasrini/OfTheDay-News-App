@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="countries_array">
+        <item>Sweden</item>
+        <item>United States</item>
+        <item>United Kingdom</item>
+        <item>Spain</item>
+        <item>France</item>
+        <item>Germany</item>
+        <item>Italy</item>
+        <item>Saudi Arabia</item>
+        <item>United Arab Emirates</item>
+        <item>Turkey</item>
+        <item>Greece</item>
+    </string-array>
+
+    <integer-array name="flags_array">
+        <item>@drawable/sweden</item>
+        <item>@drawable/usa</item>
+        <item>@drawable/uk</item>
+        <item>@drawable/spain</item>
+        <item>@drawable/france</item>
+        <item>@drawable/germany</item>
+        <item>@drawable/italy</item>
+        <item>@drawable/sa</item>
+        <item>@drawable/uae</item>
+        <item>@drawable/turkey</item>
+        <item>@drawable/greece</item>
+    </integer-array>
+
+    
+    <string-array name="source_array">
+        <item>BBC</item>
+        <item>Al Jazeera English</item>
+        <item>CNN</item>
+        <item>Svenska Dagbladet</item>
+        <item>BBC Sport</item>
+        <item>Independent</item>
+        <item>ABC News</item>
+        <item>Buzzfeed</item>
+        <item>CBC News</item>
+        <item>Reuters</item>
+        <item>The Huffington Post</item>
+        <item>The Washington Post</item>
+        <item>Marca</item>
+        <item>Göteborgs Posten</item>
+        <item>Bild</item>
+        <item>Der Tagesspiegel</item>
+    </string-array>
+
+</resources>

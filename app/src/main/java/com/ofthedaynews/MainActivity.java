@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -27,23 +28,22 @@ public class MainActivity extends AppCompatActivity {
 
         mainController = new MainController(this);
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             setFragment(mainController.getMainFragment(), false);
         }
     }
 
     public void setFragment(Fragment fragment, boolean backStack) {
-        if (!isOnline()){
-            Toast.makeText(getApplicationContext(),"You are offline!! \n Please check your internet connection!!",Toast.LENGTH_LONG).show();
+        if (!isOnline()) {
+            Toast.makeText(getApplicationContext(), "You are offline!! \n Please check your internet connection!!", Toast.LENGTH_LONG).show();
         }
 
-        if (backStack){
-            FragmentManager fragmentManager = ((MainActivity)this.mainController.getMainFragment().getContext()).getSupportFragmentManager();
+        if (backStack) {
+            FragmentManager fragmentManager = ((MainActivity) this.mainController.getMainFragment().getContext()).getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.addToBackStack(null).commit();
-        }
-        else{
+        } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -54,6 +54,24 @@ public class MainActivity extends AppCompatActivity {
     public boolean isOnline() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connManager.getActiveNetworkInfo();
-        return (info!=null && info.isConnected());
+        return (info != null && info.isConnected());
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        findViewById(R.id.searchWeatherButton).performClick();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(this, "You must allow location to use the app...", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
     }
 }

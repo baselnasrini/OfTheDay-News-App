@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.ofthedaynews.models.NewsArticle;
+import com.ofthedaynews.models.WeatherForecast;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class SharedViewModel extends ViewModel {
     private MutableLiveData<Boolean> isFilterOn;
     private MutableLiveData<Integer> selectedCountry;
     private MutableLiveData<boolean[]> selectedSources;
+    private MutableLiveData<WeatherForecast> weatherForecast;
 
     public SharedViewModel () {
         mNewsArticlesArr = new MutableLiveData<>();
@@ -29,6 +31,7 @@ public class SharedViewModel extends ViewModel {
         isFilterOn = new MutableLiveData<>();
         selectedCountry = new MutableLiveData<>();
         selectedSources = new MutableLiveData<>();
+        weatherForecast = new MutableLiveData<>();
     }
 
     public LiveData<ArrayList<NewsArticle>> getNewsArticlesArr(){
@@ -94,5 +97,14 @@ public class SharedViewModel extends ViewModel {
 
     public LiveData<boolean[]> getSelectedSources(){
         return selectedSources;
+    }
+
+    public void setWeatherForecast(WeatherForecast result) {
+        weatherForecast.setValue(result);
+        weatherForecast.postValue(result);
+    }
+
+    public LiveData<WeatherForecast> getWeatherForeCast(){
+        return  weatherForecast;
     }
 }

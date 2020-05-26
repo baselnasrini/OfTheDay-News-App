@@ -6,4 +6,8 @@
     <string name="filter_by_source">Filter By Source</string>
     <string name="save">Save</string>
     <string name="set_filter">Set filter</string>
+    <string name="GPSAlertDialogTitle">GPS Error</string>
+    <string name="GPSAlertDialogMessage">Please check your permissions</string>
+    <string name="cancel">Cancel</string>
+    <string name="action_settings">Action</string>
 </resources>

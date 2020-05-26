@@ -48,6 +48,12 @@ public class MainFragment extends Fragment {
                 mainController.viewNews();
             }
         });
+        btnWeather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainController.viewWeather();
+            }
+        });
     }
 
     public void setMainController(MainController mainController){

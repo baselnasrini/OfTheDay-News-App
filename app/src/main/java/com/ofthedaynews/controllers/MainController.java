@@ -13,6 +13,7 @@ public class MainController {
     private MainActivity activity;
     private MainFragment mainFragment;
     private NewsController newsController;
+    private WeatherController weatherController;
     
     public MainController(MainActivity mainActivity) {
         this.activity = mainActivity;
@@ -28,6 +29,11 @@ public class MainController {
     public void viewNews() {
         this.newsController = new NewsController(this);
         this.activity.setFragment(this.newsController.getFragment() , true);
+    }
+
+    public void viewWeather() {
+        this.weatherController = new WeatherController(this);
+        this.activity.setFragment(this.weatherController.getFragment() , true);
     }
 
     public MainActivity getActivity(){

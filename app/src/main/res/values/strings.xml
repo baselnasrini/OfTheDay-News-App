@@ -6,6 +6,12 @@
     <string name="filter_by_source">Filter By Source</string>
     <string name="save">Save</string>
     <string name="set_filter">Set filter</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="normal">Normal</string>
+    <string name="satellite">Satellite</string>
+    <string name="terrain">Terrain</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="none">None</string>
     <string name="GPSAlertDialogTitle">GPS Error</string>
     <string name="GPSAlertDialogMessage">Please check your permissions</string>
     <string name="cancel">Cancel</string>

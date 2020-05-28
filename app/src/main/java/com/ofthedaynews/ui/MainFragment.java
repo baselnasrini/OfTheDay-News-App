@@ -4,6 +4,7 @@
  */
 package com.ofthedaynews.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.ofthedaynews.MapsActivity;
 import com.ofthedaynews.R;
 import com.ofthedaynews.controllers.MainController;
 
@@ -20,6 +22,7 @@ import com.ofthedaynews.controllers.MainController;
 public class MainFragment extends Fragment {
     private Button btnNews;
     private Button btnWeather;
+    private Button btnMaps;
     private MainController mainController;
 
     public MainFragment() {
@@ -39,6 +42,7 @@ public class MainFragment extends Fragment {
     private void initializeComponents(View view) {
         btnNews = view.findViewById(R.id.btnNews);
         btnWeather = view.findViewById(R.id.btnWeather);
+        btnMaps = view.findViewById(R.id.btnMap);
     }
 
     private void registerListeners() {
@@ -46,6 +50,14 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mainController.viewNews();
+            }
+        });
+        btnMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+
             }
         });
     }

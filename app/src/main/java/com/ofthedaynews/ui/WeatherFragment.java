@@ -27,7 +27,7 @@ import java.util.Locale;
 public class WeatherFragment extends Fragment {
 
     private WeatherController weatherController;
-    private Button searchWeatherButton;
+    private Button searchWeatherButton, searchCurrentLocationButton;
     private EditText cityToLookFor;
     private SharedViewModel sharedViewModel;
     TextView address, updatedAtTxt, statusTxt, tempTxt, tempMinTxt, tempMaxTxt, sunriseTxt,
@@ -48,6 +48,7 @@ public class WeatherFragment extends Fragment {
 
     private void initializeComponents(View view) {
         searchWeatherButton = view.findViewById(R.id.searchWeatherButton);
+        searchCurrentLocationButton = view.findViewById(R.id.searchCurrentLocationButton);
         cityToLookFor = view.findViewById(R.id.cityToLookFor);
         address = view.findViewById(R.id.address);
         updatedAtTxt = view.findViewById(R.id.updatedAt);
@@ -77,6 +78,13 @@ public class WeatherFragment extends Fragment {
                 else
                     weatherController.updateWeatherFromCity(city);
                 hideKeyboard(getActivity());
+            }
+        });
+        searchCurrentLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cityToLookFor.setText("");
+                weatherController.updateWeatherFromLocation();
             }
         });
     }

@@ -36,9 +36,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="90dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="90dp">
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/cityToLookFor"
@@ -51,13 +51,33 @@
                 android:singleLine="true"
                 android:textAlignment="center" />
 
-            <Button
-                android:id="@+id/searchWeatherButton"
-                android:layout_width="187dp"
-                android:layout_height="57dp"
-                android:background="@drawable/custom_button"
-                android:text="@android:string/search_go"
-                android:textColor="#FFFFFF" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/searchWeatherButton"
+                    android:layout_width="130dp"
+                    android:layout_height="57dp"
+                    android:background="@drawable/custom_button"
+                    android:text="Search city"
+                    android:textColor="#FFFFFF" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"></Space>
+
+                <Button
+                    android:id="@+id/searchCurrentLocationButton"
+                    android:layout_width="130dp"
+                    android:layout_height="57dp"
+                    android:background="@drawable/custom_button"
+                    android:text="Current Location"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -146,15 +166,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sunrise"
-                        android:textSize="12dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/sunrise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <Space
@@ -184,15 +204,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sunset"
-                        android:textSize="12dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/sunset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <Space
@@ -222,15 +242,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Wind"
-                        android:textSize="12dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/wind"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -267,15 +287,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pressure"
-                        android:textSize="12dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <Space
@@ -305,15 +325,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Humidity"
-                        android:textSize="12dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/humidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <Space
@@ -343,15 +363,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Feels like"
-                        android:textSize="12dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/feelsLike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

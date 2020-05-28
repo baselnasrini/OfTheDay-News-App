@@ -57,10 +57,22 @@
 
             <Button
                 android:id="@+id/searchWeatherButton"
-                android:layout_width="137dp"
+                android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:background="@drawable/custom_button"
                 android:text="@android:string/search_go"
+                android:textColor="#FFFFFF" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"></Space>
+
+            <Button
+                android:id="@+id/searchCurrentLocationButton"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="Current Location"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 

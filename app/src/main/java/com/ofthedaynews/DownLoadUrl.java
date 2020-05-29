@@ -25,7 +25,7 @@ public class DownLoadUrl {
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-            StringBuffer stringBuffer =new StringBuffer();
+            StringBuilder stringBuffer =new StringBuilder();
             String line = "";
             while((line = bufferedReader.readLine())!= null)
             {

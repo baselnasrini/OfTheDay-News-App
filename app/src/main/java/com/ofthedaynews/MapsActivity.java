@@ -40,8 +40,6 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
 GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private static final String KEY_CAMERA_POSITION = "camera_position";
-    private static final String KEY_LOCATION = "location";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM=15f;
@@ -57,14 +55,12 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
     int PROXIMITY_RADIUS = 10000;
     double latitude, longitude;
     List<Address> addressList;
-    Address myAddress;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
         btnSearch = (Button) findViewById(R.id.btn_mapSearch);
         maptype = (ImageView) findViewById(R.id.imMaptype);
         zoomIn = (ImageView) findViewById(R.id.imZoomin);
@@ -210,12 +206,6 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                                 Address myAddress = addressList.get(i);
                                 moveCamera(new LatLng(myAddress.getLatitude(),myAddress.getLongitude()),DEFAULT_ZOOM,
                                         myAddress.getAddressLine(0));
-
-//                                LatLng latLng = new LatLng(myAddress.getLatitude(), myAddress.getLongitude());
-//                                markerOptions.position(latLng);
-//                              //  markerOptions.snippet("jesus");
-//                                mMap.addMarker(markerOptions);
-//                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
                             }
                         }
                     } catch (IOException e) {
@@ -232,7 +222,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
                 nearByPlaces.execute(dataTransfer);
-                Toast.makeText(MapsActivity.this, "Showing Nearby Hospitals", Toast.LENGTH_LONG).show();
+               // Toast.makeText(MapsActivity.this, "Showing Nearby Hospitals", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.btnRestaurant:
@@ -242,7 +232,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
                 nearByPlaces.execute(dataTransfer);
-                Toast.makeText(MapsActivity.this, "Showing Nearby Restaurant", Toast.LENGTH_LONG).show();
+               // Toast.makeText(MapsActivity.this, "Showing Nearby Restaurant", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.btnSchool:
@@ -254,7 +244,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                         dataTransfer[1] = url;
                         Log.d("onClick", url);
                         nearByPlaces.execute(dataTransfer);
-                        Toast.makeText(MapsActivity.this,"Nearby Schools", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(MapsActivity.this,"Nearby Schools", Toast.LENGTH_LONG).show();
 
                 break;
 
@@ -286,11 +276,16 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
         googlePlaceUrl.append("&radius=" + PROXIMITY_RADIUS);
         googlePlaceUrl.append("&type=" + nearbyplaces);
         googlePlaceUrl.append("&sensor=true");
-        googlePlaceUrl.append("&key=" + "AIzaSyBYHbNIDSlesk2nAgXE-4BDLiRBcV3PiT4");
-        Log.d("MPASACTIVITY", "URL" + googlePlaceUrl.toString());
+        googlePlaceUrl.append("&key=" + "AIzaSyD1r7RePlVIpkO6NmQVVOOZbETTkGblUjc");
+        Log.d("MAPSACTIVITY", "URL" + googlePlaceUrl.toString());
         Toast.makeText(MapsActivity.this,nearbyplaces, Toast.LENGTH_LONG).show();
         return googlePlaceUrl.toString();
 
     }
+
+
+
+
+
 
 }

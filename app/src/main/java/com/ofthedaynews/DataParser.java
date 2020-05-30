@@ -25,6 +25,7 @@ public class DataParser {
             if(!googlePlaceJson.isNull("name"))
             {
                     placeName = googlePlaceJson.getString("name");
+                Log.d("DataParser","To find the place ="+placeName);
             }
             if(!googlePlaceJson.isNull("vicinity"))
             {

@@ -33,7 +33,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.clustering.ClusterManager;
 
 import org.w3c.dom.Text;
 
@@ -226,7 +225,6 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
                 nearByPlaces.execute(dataTransfer);
-
                 break;
 
             case R.id.btnRestaurant:
@@ -239,7 +237,6 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                 break;
 
             case R.id.btnSchool:
-
                 mMap.clear();
                 place = "school";
                 placeSearch();
@@ -247,7 +244,6 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                 dataTransfer[1] = url;
                 Log.d("onClick", url);
                 nearByPlaces.execute(dataTransfer);
-
                 break;
 
             case R.id.imMaptype:
@@ -280,7 +276,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
         googlePlaceUrl.append("&sensor=true");
         googlePlaceUrl.append("&key=" + "AIzaSyD1r7RePlVIpkO6NmQVVOOZbETTkGblUjc");
         Log.d("MAPSACTIVITY", "URL" + googlePlaceUrl.toString());
-        Toast.makeText(MapsActivity.this,nearbyplaces, Toast.LENGTH_LONG).show();
+        //Toast.makeText(MapsActivity.this,nearbyplaces, Toast.LENGTH_LONG).show();
         return googlePlaceUrl.toString();
     }
 

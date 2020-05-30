@@ -14,9 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:backgroundTint="#4960B8"
+        android:backgroundTint="#073787"
         android:clickable="true"
         android:src="@drawable/ic_settings_black_24dp"
+        app:backgroundTint="#073787"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -227,7 +227,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
             case R.id.btnRestaurant:
                 mMap.clear();
-                String restaurant = "Restaurant";
+                String restaurant = "restaurant";
                 url = getUrl(latitude, longitude, restaurant);
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;

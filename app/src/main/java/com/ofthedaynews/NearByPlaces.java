@@ -1,5 +1,6 @@
 package com.ofthedaynews;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -8,12 +9,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-public class NearByPlaces extends AsyncTask<Object, String, String> {
+public class NearByPlaces extends AsyncTask<Object, String, String>  {
     private String googlePlacesData;
     private GoogleMap mMap;
     String url;
@@ -47,13 +47,10 @@ public class NearByPlaces extends AsyncTask<Object, String, String> {
         {
             MarkerOptions markerOptions = new MarkerOptions();
             HashMap<String,String> googlePlace = nearbyPlaceList.get(i);
-
             String placeName = googlePlace.get("place_name");
             String vicinity = googlePlace.get("vicinity");
-
             double lat = Double.parseDouble( googlePlace.get("lat"));
             double lng = Double.parseDouble( googlePlace.get("lng"));
-
             LatLng latlng = new LatLng(lat,lng);
             markerOptions.position(latlng);
             markerOptions.title(placeName +" : "+vicinity);
@@ -61,8 +58,6 @@ public class NearByPlaces extends AsyncTask<Object, String, String> {
             mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-
-
         }
     }
 }

@@ -33,6 +33,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,13 +52,16 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private Marker currentLocationMarker;
     private GoogleMap mMap;
     private GoogleApiClient client;
+    String searchString;
     private Location lastLocation;
     private Button btnSearch;
     private EditText msearchText;
     int PROXIMITY_RADIUS = 10000;
-    double latitude, longitude;
-    List<Address> addressList;
+    double latitude, longitude,searchlatitude,searchlongitude;
 
+    List<Address> addressList;
+    String place;
+    String url = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
         maptype = (ImageView) findViewById(R.id.imMaptype);
         zoomIn = (ImageView) findViewById(R.id.imZoomin);
         zoomOut = (ImageView) findViewById(R.id.imZoomout);
+        msearchText = (EditText) findViewById(R.id.input_search);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             checkLocationPermission();
@@ -72,12 +79,6 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-//        if (savedInstanceState != null) {
-//            CameraUpdate cameraPos = CameraUpdateFactory.newCameraPosition(
-//                    (CameraPosition)(savedInstanceState.getParcelable(KEY_CAMERA_POSITION)));
-//            mMap.moveCamera(cameraPos);
-//        }
     }
 
     @Override
@@ -133,6 +134,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
 //        moveCamera(new LatLng(location.getLatitude(),location.getLongitude()),
 //                DEFAULT_ZOOM,"My Location");
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
         currentLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng)
                 .title("Current Location")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
@@ -190,10 +192,10 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
     public void onClick(View view) {
         Object dataTransfer[] = new Object[2];
         NearByPlaces nearByPlaces = new NearByPlaces();
+        //String url = null;
 
         switch (view.getId()) {
             case R.id.btn_mapSearch: {
-                msearchText = (EditText) findViewById(R.id.input_search);
                 String searchString = msearchText.getText().toString();
                // List<Address> addressList;
                 MarkerOptions markerOptions = new MarkerOptions();
@@ -204,6 +206,8 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
                         if (addressList != null) {
                             for (int i = 0; i < addressList.size(); i++) {
                                 Address myAddress = addressList.get(i);
+                                searchlatitude = myAddress.getLatitude();
+                                searchlongitude = myAddress.getLongitude();
                                 moveCamera(new LatLng(myAddress.getLatitude(),myAddress.getLongitude()),DEFAULT_ZOOM,
                                         myAddress.getAddressLine(0));
                             }
@@ -217,34 +221,32 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
             case R.id.btnHospital:
                 mMap.clear();
-                String hospital = "hospital";
-                String url = getUrl(latitude, longitude, hospital);
+                place = "hospital";
+                placeSearch();
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
                 nearByPlaces.execute(dataTransfer);
-               // Toast.makeText(MapsActivity.this, "Showing Nearby Hospitals", Toast.LENGTH_LONG).show();
+
                 break;
 
             case R.id.btnRestaurant:
                 mMap.clear();
-                String restaurant = "restaurant";
-                url = getUrl(latitude, longitude, restaurant);
+                place = "restaurant";
+                placeSearch();
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
                 nearByPlaces.execute(dataTransfer);
-               // Toast.makeText(MapsActivity.this, "Showing Nearby Restaurant", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.btnSchool:
 
-                        mMap.clear();
-                        String School = "school";
-                        url = getUrl(latitude, longitude, School);
-                        dataTransfer[0] = mMap;
-                        dataTransfer[1] = url;
-                        Log.d("onClick", url);
-                        nearByPlaces.execute(dataTransfer);
-                       // Toast.makeText(MapsActivity.this,"Nearby Schools", Toast.LENGTH_LONG).show();
+                mMap.clear();
+                place = "school";
+                placeSearch();
+                dataTransfer[0] = mMap;
+                dataTransfer[1] = url;
+                Log.d("onClick", url);
+                nearByPlaces.execute(dataTransfer);
 
                 break;
 
@@ -272,7 +274,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private String getUrl(double latitude, double longitude, String nearbyplaces) {
         StringBuilder googlePlaceUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        googlePlaceUrl.append("location=" + latitude + "," + longitude);
+        googlePlaceUrl.append("location="+latitude+","+longitude);
         googlePlaceUrl.append("&radius=" + PROXIMITY_RADIUS);
         googlePlaceUrl.append("&type=" + nearbyplaces);
         googlePlaceUrl.append("&sensor=true");
@@ -280,12 +282,15 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
         Log.d("MAPSACTIVITY", "URL" + googlePlaceUrl.toString());
         Toast.makeText(MapsActivity.this,nearbyplaces, Toast.LENGTH_LONG).show();
         return googlePlaceUrl.toString();
-
     }
 
-
-
-
-
-
+ public  void placeSearch(){
+     if(msearchText.getText().toString().trim().length() == 0)
+     {
+         url = getUrl(latitude, longitude, place);
+     }else
+     {
+         url = getUrl(searchlatitude, searchlongitude, place);
+     }
+ }
 }

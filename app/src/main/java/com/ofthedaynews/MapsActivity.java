@@ -135,8 +135,7 @@ GoogleApiClient.OnConnectionFailedListener, LocationListener {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         currentLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng)
-                .title("Current Location")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                .title("Current Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
         if (client != null) {

@@ -54,7 +54,6 @@ public class NearByPlaces extends AsyncTask<Object, String, String>  {
             LatLng latlng = new LatLng(lat,lng);
             markerOptions.position(latlng);
             markerOptions.title(placeName +" : "+vicinity);
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
             mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(10));

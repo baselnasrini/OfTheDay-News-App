@@ -107,7 +107,7 @@ public class ArticleFragment extends Fragment {
                                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                                 shareIntent.setType("text/plain");
                                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "OfTheDay News App");
-                                String shareMessage= "Let me recommend you this article that I read in OfTheDay News App:\n\n" + newsArticles.getUrl() ;
+                                String shareMessage= "Let me recommend you this article that I read in Pocket Friend App:\n\n" + newsArticles.getUrl() ;
                                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                                 startActivity(Intent.createChooser(shareIntent, "choose one"));
                             } catch(Exception e) {
